@@ -1,61 +1,31 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect
-} from 'react-router-dom';
 
-import logo from './logo.svg';
+import Hero from './components/Hero';
+import SearchBox from "./components/SearchBox";
+
 import './App.css';
 
 
-const Page = ({ title }) => (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>{title}</h2>
-      </div>
-      <p className="App-intro">
-        This is the {title} page.
-      </p>
-      <p>
-        <Link to="/">Home</Link>
-      </p>
-      <p>
-        <Link to="/about">About</Link>
-      </p>
-      <p>
-        <Link to="/settings">Settings</Link>
-      </p>
-    </div>
-);
-
-const Home = (props) => (
-  <Page title="Home"/>
-);
-
-const About = (props) => (
-  <Page title="About"/>
-);
-
-const Settings = (props) => (
-  <Page title="Settings"/>
-);
-
 class App extends Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {
+        lang: 'en',
+      };
+  }
+
+  handleChange(e) {
+    alert(e.target.value);
+  }
+
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route path="/settings" component={Settings}/>
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Hero title="Shopping the way you like it!" subtitle="Order online. Delivered to your doorstep." className="is-medium" />
+
+        {this.props.children}
+      </div>
     );
   }
 }
